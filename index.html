@@ -3,45 +3,43 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0d0f18">
-    <meta name="description" content="Obra interactiva de simulación computacional - Why Bother?">
-    <title>WHY BOTHER? – ¿Realmente vale la pena?</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Rajdhani:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="WHY BOTHER? – Una experiencia de simulación interactiva">
+    <title>WHY BOTHER?</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
   </head>
   <body>
     <main>
-      <section class="simple-screen" id="simple-screen" aria-label="Primera escena">
-        <!-- Efecto de brillo holográfico tipo carta Pokémon Full Art EX -->
-        <div class="holo-foil-overlay" aria-hidden="true"></div>
-        <div class="quiet-field" id="quiet-field" aria-hidden="true">
-          <div class="quiet-orbit quiet-orbit-outer"></div>
-          <div class="quiet-orbit quiet-orbit-inner"></div>
-          <div class="quiet-center"></div>
+      <!-- FASE 1: Minimalista, Blanco y Negro con Formas Geométricas -->
+      <section class="simple-screen" id="simple-screen" aria-label="Primera fase">
+        <div class="shapes-container" id="shapes-container">
+          <button class="geo-shape shape-circle" data-shape="circle" aria-label="Círculo"></button>
+          <button class="geo-shape shape-square" data-shape="square" aria-label="Cuadrado"></button>
+          <button class="geo-shape shape-triangle" data-shape="triangle" aria-label="Triángulo"></button>
         </div>
-        <section class="choice-panel" id="choice-panel" aria-live="polite" hidden>
-          <div class="card-header-badge"><span>SPECIAL ART RARE</span><span>EX • 360 HP</span></div>
-          <h1>¿Podríamos hacer que esto valga la pena?</h1>
-          <p class="card-subtitle">La simulación espera tu decisión para trascender lo ordinario.</p>
+        <div class="minimal-output" id="minimal-output" aria-live="polite"></div>
+
+        <!-- Pregunta que aparece de la nada -->
+        <div class="question-overlay" id="question-overlay" hidden>
+          <h1 class="question-text">¿Podríamos hacer que esto valga la pena?</h1>
           <div class="choice-actions" id="choice-actions">
-            <button class="choice-button choice-yes" id="choose-yes" type="button">Sí, trascender</button>
-            <button class="choice-button choice-no" id="choose-no" type="button">No, continuar simple</button>
+            <button class="choice-btn" id="choose-yes" type="button">SÍ</button>
+            <button class="choice-btn" id="choose-no" type="button">NO</button>
           </div>
-          <output class="extra-time" id="extra-time" aria-live="off" hidden>
-            Tiempo extra de exploración: <span id="countdown">45</span>s
-          </output>
-        </section>
+          <div class="extra-time" id="extra-time" hidden>
+            <span id="countdown">45</span>
+          </div>
+        </div>
+
         <div class="transition-curtain" aria-hidden="true"></div>
       </section>
 
-      <section class="discovery-screen" id="discovery-screen" aria-label="Experiencia visual interactiva generativa">
-        <canvas id="simulation" aria-label="Mueve el cursor, toca o haz clic para interactuar con el universo generativo."></canvas>
-        <div class="hud-overlay" aria-hidden="true">
-          <div class="hud-title">WHY BOTHER? <span class="hud-sub">Full Art Simulation Engine</span></div>
-          <div class="hud-hints">[Espacio]: Cambiar Paleta | [M]: Cambiar Modo | [Doble Clic / Clic]: Estallido Cósmico | [Esc]: Reiniciar</div>
+      <!-- FASE 2: Universo Generativo y Partículas Adaptativas -->
+      <section class="discovery-screen" id="discovery-screen" aria-label="Experiencia interactiva colorida">
+        <canvas id="simulation"></canvas>
+        <div class="subtle-hint" aria-hidden="true">
+          Las posibilidades aparecen cuando decides explorar.
         </div>
       </section>
     </main>
