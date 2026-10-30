@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0f18">
+    <meta name="description" content="Obra interactiva de simulación computacional - Why Bother?">
+    <title>WHY BOTHER? – ¿Realmente vale la pena?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Rajdhani:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="simple-screen" id="simple-screen" aria-label="Primera escena">
+        <!-- Efecto de brillo holográfico tipo carta Pokémon Full Art EX -->
+        <div class="holo-foil-overlay" aria-hidden="true"></div>
+        <div class="quiet-field" id="quiet-field" aria-hidden="true">
+          <div class="quiet-orbit quiet-orbit-outer"></div>
+          <div class="quiet-orbit quiet-orbit-inner"></div>
+          <div class="quiet-center"></div>
+        </div>
+        <section class="choice-panel" id="choice-panel" aria-live="polite" hidden>
+          <div class="card-header-badge"><span>SPECIAL ART RARE</span><span>EX • 360 HP</span></div>
+          <h1>¿Podríamos hacer que esto valga la pena?</h1>
+          <p class="card-subtitle">La simulación espera tu decisión para trascender lo ordinario.</p>
+          <div class="choice-actions" id="choice-actions">
+            <button class="choice-button choice-yes" id="choose-yes" type="button">Sí, trascender</button>
+            <button class="choice-button choice-no" id="choose-no" type="button">No, continuar simple</button>
+          </div>
+          <output class="extra-time" id="extra-time" aria-live="off" hidden>
+            Tiempo extra de exploración: <span id="countdown">45</span>s
+          </output>
+        </section>
+        <div class="transition-curtain" aria-hidden="true"></div>
+      </section>
+
+      <section class="discovery-screen" id="discovery-screen" aria-label="Experiencia visual interactiva generativa">
+        <canvas id="simulation" aria-label="Mueve el cursor, toca o haz clic para interactuar con el universo generativo."></canvas>
+        <div class="hud-overlay" aria-hidden="true">
+          <div class="hud-title">WHY BOTHER? <span class="hud-sub">Full Art Simulation Engine</span></div>
+          <div class="hud-hints">[Espacio]: Cambiar Paleta | [M]: Cambiar Modo | [Doble Clic / Clic]: Estallido Cósmico | [Esc]: Reiniciar</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

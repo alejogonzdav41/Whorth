@@ -1,0 +1,310 @@
+:root {
+  color-scheme: dark;
+  --bg-primary: #0a0c14;
+  --gold-foil: linear-gradient(135deg, #ffd700, #ff8c00, #da70d6, #00ffff, #ffd700);
+  --holo-shine: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.4) 40%, rgba(0, 255, 255, 0.3) 50%, rgba(255, 0, 255, 0.3) 60%, transparent 80%);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg-primary);
+  color: #f3f4f6;
+}
+
+button { font: inherit; cursor: pointer; }
+
+/* Pantalla Inicial con Estética de Carta Pokémon Full Art EX */
+.simple-screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #1a1e36 0%, #080a10 100%);
+}
+
+.holo-foil-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--holo-shine);
+  background-size: 200% 200%;
+  mix-blend-mode: color-dodge;
+  opacity: 0.35;
+  pointer-events: none;
+  animation: foilShift 8s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+@keyframes foilShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.quiet-field {
+  --move-x: 0px;
+  --move-y: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 220px;
+  height: 220px;
+  transform: translate(calc(-50% + var(--move-x)), calc(-50% + var(--move-y)));
+  transition: transform 1.2s cubic-bezier(.2,.7,.2,1);
+  z-index: 1;
+}
+
+.quiet-orbit, .quiet-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.quiet-orbit {
+  border: 2px dashed rgba(255, 215, 0, 0.35);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+.quiet-orbit-outer { width: 140px; height: 140px; }
+.quiet-orbit-inner { width: 70px; height: 70px; animation-delay: -2s; border-style: solid; border-color: rgba(218, 112, 214, 0.5); }
+.quiet-center {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #00ffff, #ff00ff);
+  box-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+  animation: glimmer 4s ease-in-out infinite;
+}
+
+/* Panel de Elección Estilo Carta Full Art EX */
+.choice-panel {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  width: min(520px, calc(100vw - 32px));
+  padding: 38px 28px;
+  background: rgba(12, 16, 28, 0.88);
+  backdrop-filter: blur(16px);
+  border: 3px solid transparent;
+  border-image: var(--gold-foil) 1;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.25), inset 0 0 20px rgba(0, 255, 255, 0.15);
+  text-align: center;
+  animation: appear 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.choice-panel[hidden], .choice-actions[hidden], .extra-time[hidden] { display: none; }
+
+.card-header-badge {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: #ffd700;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+  padding-bottom: 8px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.choice-panel h1 {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(26px, 4.2vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #ffffff 30%, #ffd700 70%, #00ffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+}
+
+.card-subtitle {
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  color: #a5b4fc;
+  letter-spacing: 0.05em;
+}
+
+.choice-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.choice-button {
+  min-width: 130px;
+  min-height: 48px;
+  padding: 0 24px;
+  border: 2px solid rgba(255, 215, 0, 0.6);
+  border-radius: 4px;
+  background: rgba(20, 25, 45, 0.9);
+  color: #f3f4f6;
+  cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.choice-button:hover {
+  border-color: #00ffff;
+  background: rgba(0, 255, 255, 0.15);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 10px rgba(0, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.choice-yes {
+  background: linear-gradient(135deg, #2563eb, #9333ea, #db2777);
+  border-color: #ffd700;
+  color: #ffffff;
+}
+
+.choice-yes:hover {
+  background: linear-gradient(135deg, #3b82f6, #a855f7, #ec4899);
+  box-shadow: 0 0 25px rgba(219, 39, 119, 0.6), 0 0 25px rgba(255, 215, 0, 0.5);
+}
+
+.extra-time {
+  font-family: 'Rajdhani', sans-serif;
+  color: #cbd5e1;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.extra-time span {
+  color: #38bdf8;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.transition-curtain {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, #ffffff 0%, #1a1e36 50%, #000000 100%);
+  clip-path: circle(0 at 50% 50%);
+}
+
+.simple-screen.is-transforming .transition-curtain {
+  animation: reveal 1.2s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+
+/* Pantalla de Descubrimiento (Segunda Experiencia) */
+.discovery-screen {
+  --sim-bg: #0a0c14;
+  --sim-ink: #f3f4f6;
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+  background: var(--sim-bg);
+  color: var(--sim-ink);
+  animation: discovery-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.discovery-screen.is-visible { display: block; }
+#simulation { display: block; width: 100%; height: 100%; touch-action: none; }
+
+.hud-overlay {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  font-family: 'Rajdhani', sans-serif;
+  z-index: 30;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.hud-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  color: #ffd700;
+}
+
+.hud-sub {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #38bdf8;
+  margin-left: 10px;
+  letter-spacing: 0.05em;
+}
+
+.hud-hints {
+  font-size: 13px;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  background: rgba(10, 12, 20, 0.6);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.92); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@keyframes glimmer {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); box-shadow: 0 0 15px #00ffff; }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.6); box-shadow: 0 0 30px #ff00ff, 0 0 50px #ffd700; }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes reveal {
+  0% { clip-path: circle(0 at 50% 50%); opacity: 1; }
+  60% { clip-path: circle(85% at 50% 50%); opacity: 1; }
+  100% { clip-path: circle(180% at 50% 50%); opacity: 0; }
+}
+
+@keyframes discovery-in {
+  from { opacity: 0; transform: scale(1.06); filter: brightness(2); }
+  to { opacity: 1; transform: scale(1); filter: brightness(1); }
+}
+
+@media (max-width: 600px) {
+  .hud-overlay { flex-direction: column; align-items: flex-start; gap: 8px; top: 15px; left: 15px; right: 15px; }
+  .choice-actions { flex-direction: column; width: 100%; }
+  .choice-button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
